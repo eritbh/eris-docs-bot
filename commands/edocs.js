@@ -13,11 +13,11 @@ const embedDefaults = {
 	},
 	color: 0x4e98d8,
 	footer: {
-		text: `Docs generated from eris@${erisPackage.version}`
+		text: `Docs generated from eris@${erisPackage.version} | e;docs Class#property`
 	}
 };
 
-module.exports = new Command('edocs', (msg, args) => {
+module.exports = new Command(['docs', ''], (msg, args) => {
 	let [classname, search] = args.join(' ').split(/[#. ]/);
 	// 'new Client' => 'Client'
 	if (classname === 'new') {
