@@ -78,7 +78,7 @@ for (const doclet of rawDocsData) {
 				// into the rest of the info when it's picked up (see above,
 				// this may be too clever)
 				classes.push({
-					name: doclet.memberOf,
+					name: doclet.memberof,
 					[category]: [obj]
 				});
 			}
