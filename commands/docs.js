@@ -101,8 +101,8 @@ function formatClass (docsClass) {
 						value: categoryData.slice(0, 5).map(item => item.name).join('\n') || '\\*dust*',
 						inline: true
 					};
-				}).filter(s => s)
-			]
+				})
+			].filter(f => f && f.value) // Remove undefined/valueless fields
 		}
 	};
 }
