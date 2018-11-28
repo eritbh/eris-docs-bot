@@ -1,0 +1,6 @@
+{
+	"extends": "@geo1088",
+	"parserOptions": {
+		"ecmaVersion": 2018
+	}
+}
