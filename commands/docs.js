@@ -7,10 +7,6 @@ const erisPackage = require('../node_modules/eris/package.json');
 
 // Properties pulled into all embeds for consistency
 const embedDefaults = {
-	author: {
-		name: 'Eris docs',
-		url: 'https://abal.moe/Eris'
-	},
 	color: 0x4e98d8,
 	footer: {
 		text: `Docs generated from eris@${erisPackage.version} | e;docs Class#property`
@@ -26,7 +22,8 @@ module.exports = new Command(['docs', ''], (msg, args) => {
 	}
 
 	if (!classname) {
-		msg.channel.createMessage('https://abal.moe/Eris/docs');
+		// TODO: class list
+		msg.channel.createMessage('Full Docs: <https://abal.moe/Eris/docs>\nUsage: `e;docs ClassName.methodName`\nthis will generate a class list soon:tm:');
 		return;
 	}
 	const docsClass = classes.find(cls => cls.name.toLowerCase() === classname.toLowerCase());
