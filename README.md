@@ -16,3 +16,7 @@ node index.js
 ## Contributing
 
 just do it
+
+## License
+
+MIT
