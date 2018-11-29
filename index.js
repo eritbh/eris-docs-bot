@@ -4,10 +4,10 @@ const config = require('./config');
 
 const c = new Client(config);
 
-c.on('ready', () => {
+c.once('ready', () => {
 	console.log('Ready!');
 });
-
+c.on('error', console.error);
 c.addCommandDir(path.join(__dirname, 'commands'));
 
 c.connect();
