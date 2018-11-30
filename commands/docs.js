@@ -88,7 +88,7 @@ function paramList (params, url) {
 function formatClass (docsClass) {
 	const url = linkTo(docsClass.name);
 	return {
-		content: `<${url}>`,
+		content: `Docs: <${url}>`,
 		embed: {
 			...embedDefaults,
 			title: `\`${docsClass.name}\``,
