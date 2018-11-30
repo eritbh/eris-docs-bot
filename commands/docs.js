@@ -109,22 +109,16 @@ function formatMethodOrEvent (doclet) {
 	const message = {
 		content: `Docs: <${url}>`,
 		embed: {
+			...embedDefaults,
 			title: `\`${doclet.display}\``,
 			description: doclet.description,
 			url,
-			color: 2274004,
-			author: {
-				name: 'Eris docs'
-			},
 			fields: [
 				{
 					name: 'Parameters',
 					value: paramList(doclet.params)
 				}
-			],
-			footer: {
-				text: `Docs generated from eris@${erisPackage.version}`
-			}
+			]
 		}
 	};
 	if (doclet.kind === 'function') {
@@ -140,6 +134,7 @@ function formatProperty (classname, property) {
 	return {
 		content: `Docs: <${url}>`,
 		embed: {
+			...embedDefaults,
 			title: `${classname}#${property.name}`,
 			url,
 			description: property.description,
