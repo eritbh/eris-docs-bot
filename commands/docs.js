@@ -64,12 +64,20 @@ function linkTo (classname, doclet) {
 }
 
 // Generate a list of parameters to put in a field value
-function paramList (params) {
-	let string = params
+function paramList (params, url) {
+	// Exclude object parameter properties
+	const baseParams = params.filter(param => !param.name.includes('.'));
+	let string = baseParams
 		.map(param => `**\`${param.name}\`** (${param.type})\n${param.description}${param.defaultvalue ? `\nDefault: \`${param.defaultValue}\`` : ''}`)
 		.join('\n\n');
+	if (url && params.length !== baseParams.length) {
+		string += `\n\nCheck the [full documentation](${url}) for properties on passed objects.`;
+	}
 	// Quick and dirty fit to the length requirement - this happens listing the
 	// client's constructor parameters, for instance
+	// FIXME: It's not desirable that the "more info" text above is cut off;
+	//        maybe it should be added afterwards? Too lazy to worry about it
+	//        for right now
 	if (string.length > 1024) {
 		string = `${string.slice(0, 1021)}...`;
 	}
@@ -89,7 +97,7 @@ function formatClass (docsClass) {
 			fields: [
 				{
 					name: 'Constructor Params',
-					value: paramList(docsClass.params)
+					value: paramList(docsClass.params, url)
 				},
 				...['properties', 'methods', 'events'].map(category => {
 					const categoryData = docsClass[category];
@@ -116,7 +124,7 @@ function formatMethodOrEvent (doclet) {
 			fields: [
 				{
 					name: 'Parameters',
-					value: paramList(doclet.params)
+					value: paramList(doclet.params, url)
 				}
 			]
 		}
