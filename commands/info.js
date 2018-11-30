@@ -8,6 +8,6 @@ module.exports = new Command(['info', 'help', 'version'], msg => {
 	msg.channel.createMessage(`
 Usage: \`e;docs ClassName\` or \`e;docs ClassName#methodPropOrEvent\`
 Source: <https://github.com/Geo1088/eris-docs-bot>
-Commit ${gitCommit} jsdoc@${jsdocVersion} eris@${erisVersion}
+Bot commit: \`${gitCommit}\`, using \`jsdoc@${jsdocVersion}\`, \`eris@${erisVersion}\`
 	`);
 });
