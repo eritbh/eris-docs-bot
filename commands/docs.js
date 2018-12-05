@@ -112,6 +112,7 @@ function formatClass (docsClass) {
 	};
 }
 function formatMethodOrEvent (doclet) {
+	console.log('Method or event', doclet.display);
 	const classname = doclet.display.replace(/#.*/, '');
 	const url = linkTo(classname, doclet);
 	const message = {
@@ -123,18 +124,16 @@ function formatMethodOrEvent (doclet) {
 			url,
 			fields: [
 				{
+					name: 'Return Type',
+					value: doclet.returns
+				},
+				{
 					name: 'Parameters',
 					value: paramList(doclet.params, url)
 				}
-			]
+			].filter(f => f && f.value)
 		}
 	};
-	if (doclet.kind === 'function') {
-		message.embed.fields.push({
-			name: 'Return Type',
-			value: doclet.returns
-		});
-	}
 	return message;
 }
 function formatProperty (classname, property) {
@@ -151,10 +150,12 @@ function formatProperty (classname, property) {
 					name: 'Type',
 					value: property.type
 				}
-			]
+			].filter(f => f && f.value)
 		}
 	};
 }
 
 // Readability - .catch(pass) instead of .catch(() => {}) or something else
-function pass () {}
+function pass (err) {
+	console.error(err);
+}
