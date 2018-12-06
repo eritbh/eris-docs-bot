@@ -1,5 +1,5 @@
 {
-  "name": "eris-docs-bot-maybe",
+  "name": "eris-docs-bot",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -10,6 +10,11 @@
   "devDependencies": {
     "@geo1088/eslint-config": "^1.5.0",
     "eslint": "^5.9.0"
+  },
+  "scripts": {
+    "jsdoc": "node_modules/.bin/jsdoc node_modules/eris/lib -r -X -d console",
+    "lint": "node_modules/.bin/eslint . --ext .js",
+    "start": "node index.js"
   },
   "repository": "https://github.com/Geo1088/eris-docs-bot.git",
   "author": "Geo1088 <georgej1088@gmail.com>"
