@@ -1,10 +1,15 @@
 const childProcess = require('child_process');
+// Version info, etc. can be found in package.json
+const erisPackage = require('../node_modules/eris/package');
 
 // Execute jsdoc, get the JSON output, parse it, and store it.
-const command = './node_modules/.bin/jsdoc node_modules/eris -r -X -d console';
-console.log(`> ${command}`);
-const rawDocsData = JSON.parse(childProcess.execSync(command, 'utf8'));
-const classes = []; // We'll clean up the info and write what we want here
+const rawDocsData = JSON.parse(childProcess
+	.execSync('npm run jsdoc', {encoding: 'utf8'})
+	.replace(/^> [^\n]*/gm, m => console.log(m) || ''));
+console.log();
+// We'll clean up the info and write what we want here
+const classes = [];
+const constants = [];
 
 // Helper: converts the prop/param format from jsdoc to an easier to work with
 // format, broken out because it's used in a bunch of places
@@ -19,11 +24,41 @@ function paramPropMapper (param) {
 	};
 }
 
+// Helper: converts the value from jsdoc to a more human-readable format
+function constantValueMapper (value) {
+	if (Array.isArray(value)) {
+		if (value.length <= 6) {
+			const divider = value.some(i => i.length > 5) ? '\n' : ' ';
+			return `Values:${divider}\`${value.join(`\`,${divider}\``)}\``;
+		}
+		return `Values:\n\`${value.slice(0, 6).join('`,\n`')}\`\n...and ${value.length - 6} more.`;
+	} else if (typeof value === 'number') {
+		return `Value: ${value}`;
+	}
+	const keys = Object.keys(value);
+	if (keys.length <= 6) {
+		return keys.map(key => `\`${key}\` = \`${value[key]}\``).join('\n');
+	}
+	return `${keys
+		.slice(0, 6)
+		.map(key => `\`${key}\` = \`${value[key]}\``)
+		.join('\n')}\n...and ${keys.length - 6} more.`;
+}
+
 // Loop over all the doclets
 for (const doclet of rawDocsData) {
 	// Discard undocumented things to get rid of duplicate info
-	if (doclet.undocumented) continue;
-
+	if (doclet.undocumented) {
+		if (doclet.meta.filename !== 'Constants.js' || doclet.longname.includes('.')) continue;
+		// Except for constants, we need those
+		constants.push({
+			name: doclet.name,
+			display: `Constants#${doclet.name}`,
+			value: constantValueMapper(JSON.parse(doclet.meta.code.value))
+		});
+		continue;
+	}
+	// Parse all class-related data
 	switch (doclet.kind) {
 		case 'class': {
 			const classObject = {
@@ -31,7 +66,7 @@ for (const doclet of rawDocsData) {
 				display: doclet.longname,
 				description: doclet.classdesc,
 				augments: doclet.augments,
-				params: doclet.params && doclet.params.map(paramPropMapper),
+				params: doclet.params && doclet.params.filter(param => !param.name.includes('.')).map(paramPropMapper),
 				properties: doclet.properties && doclet.properties.map(paramPropMapper),
 				methods: [],
 				events: []
@@ -51,7 +86,8 @@ for (const doclet of rawDocsData) {
 		}
 		// Things that go on classes (properties come with the class itself)
 		case 'function':
-		case 'event': {
+		case 'event':
+		case 'member': {
 			// For some reason events have 'properties' not 'params' in jsdoc,
 			// this is stupid and we do not follow this
 			const params = doclet.params || doclet.properties;
@@ -69,7 +105,7 @@ for (const doclet of rawDocsData) {
 			// Find the class this method is attached to
 			const classObj = classes.find(c => c.name === doclet.memberof);
 			// Convert jsdoc reported kind to the appropriate method names defined above
-			const category = (doclet.kind === 'function' ? 'methods' : 'events');
+			const category = (doclet.kind === 'function' ? 'methods' : doclet.kind === 'member' ? 'properties' : 'events');
 			if (classObj) {
 				// Simply insert the new thing where it belongs
 				classObj[category].push(obj);
@@ -90,13 +126,14 @@ for (const doclet of rawDocsData) {
 		}
 		// If it's not identified, log a warning but ignore it
 		default: {
-			console.log('Warning: Unknown doclet kind:', doclet.kind);
+			console.warn('Warning: Unknown doclet kind:', doclet.kind);
 		}
 	}
 }
 
-console.log(`Loaded documentation for ${classes.length} classes`);
-// debugging
-// require('fs').writeFileSync('debug.json', JSON.stringify(classes, null, '\t'), 'utf8');
+console.log(`Loaded documentation for eris@${erisPackage.version}`);
 
-module.exports = classes;
+module.exports = {
+	classes: classes.sort((a, b) => a.name.localeCompare(b.name)),
+	constants
+};
