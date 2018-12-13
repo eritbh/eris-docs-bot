@@ -170,7 +170,7 @@ function formatClass (docsClass) {
 					const categoryData = docsClass[category];
 					return categoryData && {
 						name: `${categoryData.length} ${category}`,
-						value: categoryData.slice(0, 5).map(item => item.name).join('\n') || '\\*dust*',
+						value: categoryData.slice(0, 5).map(item => item.name).join('\n'),
 						inline: true
 					};
 				})
