@@ -16,7 +16,7 @@ const embedDefaults = {
 };
 
 module.exports = new Command(['docs', ''], (msg, args) => {
-	let [classname, search] = args.join(' ').split(/[#. ]/);
+	const [classname, search] = args.join(' ').split(/[#. ]/);
 	if (!classname) {
 		return msg.channel.createMessage({
 			content: 'Docs: https://abal.moe/Eris/docs',
