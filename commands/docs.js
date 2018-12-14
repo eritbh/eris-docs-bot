@@ -198,7 +198,7 @@ function formatMethodOrEvent (doclet) {
 			fields: [
 				{
 					name: 'Return Type',
-					value: doclet.returns
+					value: doclet.returns && `\`${doclet.returns}\``
 				},
 				{
 					name: 'Parameters',
