@@ -102,11 +102,11 @@ function linkTo (classname, doclet, kind) {
 }
 
 // Generate a list of parameters to put in a field value
-function paramList (params, url) {
-	let string = params
+function paramList (thing, url) {
+	let string = thing.params && thing.params
 		.map(param => `**\`${param.name}\`** (${param.type})\n${param.description}${param.defaultvalue ? `\nDefault: \`${param.defaultValue}\`` : ''}`)
 		.join('\n\n');
-	if (params.some(param => param.name === 'options' && param.type === 'Object')) {
+	if (thing.hasOptions) {
 		string += `\n\nCheck the [full documentation](${url}) for properties on passed objects.`;
 	}
 	return string;
@@ -164,7 +164,7 @@ function formatClass (docsClass) {
 			fields: [
 				{
 					name: 'Constructor Params',
-					value: paramList(docsClass.params, url)
+					value: paramList(docsClass, url)
 				},
 				...memberCategories.map(category => {
 					const categoryData = docsClass[category];
@@ -202,7 +202,7 @@ function formatMethodOrEvent (doclet) {
 				},
 				{
 					name: 'Parameters',
-					value: paramList(doclet.params, url)
+					value: paramList(doclet, url)
 				}
 			].filter(f => f && f.value)
 		}

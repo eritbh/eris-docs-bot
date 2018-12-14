@@ -61,12 +61,14 @@ for (const doclet of rawDocsData) {
 	// Parse all class-related data
 	switch (doclet.kind) {
 		case 'class': {
+			const baseParams = doclet.params && doclet.params.filter(p => !p.name.includes('.')).map(paramPropMapper);
 			const classObject = {
 				name: doclet.name,
 				display: doclet.longname,
 				description: doclet.classdesc,
 				augments: doclet.augments,
-				params: doclet.params && doclet.params.filter(param => !param.name.includes('.')).map(paramPropMapper),
+				params: baseParams,
+				hasOptions: doclet.params && baseParams.length !== doclet.params.length,
 				properties: doclet.properties && doclet.properties.map(paramPropMapper),
 				methods: [],
 				events: []
@@ -91,12 +93,14 @@ for (const doclet of rawDocsData) {
 			// For some reason events have 'properties' not 'params' in jsdoc,
 			// this is stupid and we do not follow this
 			const params = doclet.params || doclet.properties;
+			const baseParams = params && params.filter(p => !p.name.includes('.')).map(paramPropMapper);
 			const obj = {
 				name: doclet.name,
 				kind: doclet.kind,
 				display: doclet.longname,
 				description: doclet.description,
-				params: params && params.map(paramPropMapper),
+				params: baseParams,
+				hasOptions: params && params.length !== baseParams.length,
 				// I'm pretty sure this will always be an array of 1, but join
 				// twice just to be safe. Also this will always be undefined
 				// on events but DRY and it doesn't matter that much.
