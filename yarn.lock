@@ -23,10 +23,10 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.5.5.tgz#02f077ac8817d3df4a832ef59de67565e71cca4b"
   integrity sha512-E5BN68cqR7dhKan1SfqgPGhQ178bkVKpXTPEXnFJBrEt8/DKRZlybmy+IgYLTeN7tp1R5Ccmbm2rBk17sHYU3g==
 
-"@geo1088/eslint-config@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@geo1088/eslint-config/-/eslint-config-1.5.0.tgz#881db034652d1527808cce0fec8e328ecdfafafa"
-  integrity sha512-JGJ3LRRfrpVKEj2nYyN194zkCH0agxnE9LCGg1yRBTYzzkE/ZqeBvba5pCt89DTLuio6Wju9j/c+gYWRYnDxtQ==
+"@geo1088/eslint-config@^3.0.10":
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/@geo1088/eslint-config/-/eslint-config-3.0.10.tgz#98c39c9656b0eb88d1bf47229dce4a5fdda34d04"
+  integrity sha512-2X1kPPliRFmlLNe3nSbS5BzUShVkEYEC6py8kxV6vmdl5HXKnmQLGOI2oR/xXS8afku73mVMVePeUzYzwWIXGQ==
 
 acorn-jsx@^5.0.0:
   version "5.0.1"

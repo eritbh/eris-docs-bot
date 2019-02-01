@@ -8,7 +8,7 @@
     "yuuko": "1.0.0-repub"
   },
   "devDependencies": {
-    "@geo1088/eslint-config": "^1.5.0",
+    "@geo1088/eslint-config": "^3.0.10",
     "eslint": "^5.9.0"
   },
   "scripts": {
