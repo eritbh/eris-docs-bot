@@ -104,7 +104,7 @@ function linkTo (classname, doclet, kind) {
 // Generate a list of parameters to put in a field value
 function paramList (thing, url) {
 	let string = thing.params && thing.params
-		.map(param => `**\`${param.name}\`** (${param.type})\n${param.description}${param.defaultvalue ? `\nDefault: \`${param.defaultvalue}\`` : ''}`)
+		.map(param => `**\`${param.name}\`** (${param.type}${param.optional ? ', optional' : ''})\n${param.description}${param.defaultvalue ? `\nDefault: \`${param.defaultvalue}\`` : ''}`)
 		.join('\n\n');
 	if (thing.hasOptions) {
 		string += `\n\nCheck the [full documentation](${url}) for properties on passed objects.`;
