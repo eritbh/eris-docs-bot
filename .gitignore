@@ -1,5 +1,7 @@
 node_modules
 .vscode
+yarn-error.log
 
 config.json
 debug.json
+
