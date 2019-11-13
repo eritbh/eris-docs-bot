@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "eris": "^0.11.0",
     "jsdoc": "^3.5.5",
-    "yuuko": "1.0.0-repub"
+    "yuuko": "1.1.0"
   },
   "devDependencies": {
     "@geo1088/eslint-config": "^3.0.10",
