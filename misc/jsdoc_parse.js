@@ -1,3 +1,5 @@
+'use strict';
+
 const childProcess = require('child_process');
 // Version info, etc. can be found in package.json
 const erisPackage = require('../node_modules/eris/package');
@@ -109,7 +111,17 @@ for (const doclet of rawDocsData) {
 			// Find the class this method is attached to
 			const classObj = classes.find(c => c.name === doclet.memberof);
 			// Convert jsdoc reported kind to the appropriate method names defined above
-			const category = doclet.kind === 'function' ? 'methods' : doclet.kind === 'member' ? 'properties' : 'events';
+			let category;
+			switch (doclet.kind) {
+				case 'function':
+					category = 'methods';
+					break;
+				case 'member':
+					category = 'properties';
+					break;
+				default:
+					category = 'events';
+			}
 			if (classObj) {
 				// Simply insert the new thing where it belongs
 				classObj[category].push(obj);

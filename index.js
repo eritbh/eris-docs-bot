@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const {Client} = require('yuuko');
 const config = require('./config');

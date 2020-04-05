@@ -1,8 +1,10 @@
+'use strict';
+
 const {Command} = require('yuuko');
 const util = require('util');
 
 const inspectOptions = {
-	depth: 1
+	depth: 1,
 };
 
 // We give the prefix and commandName args for debugging purposes
@@ -25,8 +27,9 @@ module.exports = new Command(['eval', 'debug', 'js'], (async function (msg, args
 		},
 		_formatLines () {
 			return this._lines.map(line => line && `//> ${line}\n`).join('');
-		}
+		},
 	};
+	// eslint-disable-next-line no-multi-assign
 	c.log = c.error = c.warn = c.info = c._logger;
 
 	// Eval the things and send the results
@@ -67,5 +70,5 @@ module.exports = new Command(['eval', 'debug', 'js'], (async function (msg, args
 		}
 	}
 }), {
-	owner: true
+	owner: true,
 });

@@ -1,3 +1,5 @@
+'use strict';
+
 const childProcess = require('child_process');
 const {Command} = require('yuuko');
 const {version: erisVersion} = require('../node_modules/eris/package');
@@ -5,7 +7,7 @@ const {version: jsdocVersion} = require('../node_modules/jsdoc/package');
 const gitCommit = childProcess.execSync('git rev-parse --short HEAD', {encoding: 'utf8'}).slice(0, -1);
 
 module.exports = new Command([
-	'info', 
+	'info',
 	'help',
 	'version',
 	'ping',
