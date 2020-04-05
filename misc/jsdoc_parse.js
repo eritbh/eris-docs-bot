@@ -4,7 +4,7 @@ const erisPackage = require('../node_modules/eris/package');
 
 // Execute jsdoc, get the JSON output, parse it, and store it.
 const rawDocsData = JSON.parse(childProcess
-	.execSync('npm run jsdoc', {encoding: 'utf8', maxBuffer: Infinity})
+	.execSync('yarn --silent run jsdoc', {encoding: 'utf8', maxBuffer: Infinity})
 	.replace(/^> [^\n]*/gm, m => console.log(m) || ''));
 console.log();
 // We'll clean up the info and write what we want here
@@ -20,7 +20,7 @@ function paramPropMapper (param) {
 		optional: param.optional,
 		nullable: param.nullable,
 		defaultvalue: param.defaultvalue,
-		description: param.description
+		description: param.description,
 	};
 }
 
@@ -54,7 +54,7 @@ for (const doclet of rawDocsData) {
 		constants.push({
 			name: doclet.name,
 			display: `Constants#${doclet.name}`,
-			value: constantValueMapper(JSON.parse(doclet.meta.code.value))
+			value: constantValueMapper(JSON.parse(doclet.meta.code.value)),
 		});
 		continue;
 	}
@@ -71,7 +71,7 @@ for (const doclet of rawDocsData) {
 				hasOptions: doclet.params && baseParams.length !== doclet.params.length,
 				properties: doclet.properties && doclet.properties.map(paramPropMapper),
 				methods: [],
-				events: []
+				events: [],
 			};
 			// If we encountered methods/events for this class before the main
 			// class info, merge those into the new object
@@ -104,12 +104,12 @@ for (const doclet of rawDocsData) {
 				// I'm pretty sure this will always be an array of 1, but join
 				// twice just to be safe. Also this will always be undefined
 				// on events but DRY and it doesn't matter that much.
-				returns: doclet.returns && doclet.returns.map(r => r.type.names.join(' | ')).join(', ')
+				returns: doclet.returns && doclet.returns.map(r => r.type.names.join(' | ')).join(', '),
 			};
 			// Find the class this method is attached to
 			const classObj = classes.find(c => c.name === doclet.memberof);
 			// Convert jsdoc reported kind to the appropriate method names defined above
-			const category = (doclet.kind === 'function' ? 'methods' : doclet.kind === 'member' ? 'properties' : 'events');
+			const category = doclet.kind === 'function' ? 'methods' : doclet.kind === 'member' ? 'properties' : 'events';
 			if (classObj) {
 				// Simply insert the new thing where it belongs
 				classObj[category].push(obj);
@@ -119,7 +119,7 @@ for (const doclet of rawDocsData) {
 				// this may be too clever)
 				classes.push({
 					name: doclet.memberof,
-					[category]: [obj]
+					[category]: [obj],
 				});
 			}
 			break;
@@ -139,5 +139,5 @@ console.log(`Loaded documentation for eris@${erisPackage.version}`);
 
 module.exports = {
 	classes: classes.sort((a, b) => a.name.localeCompare(b.name)),
-	constants
+	constants,
 };
