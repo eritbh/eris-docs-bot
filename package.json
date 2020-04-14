@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "eris": "^0.11.2",
+    "eris": "^0.12.0",
     "jsdoc": "^3.5.5",
     "yuuko": "^2.0.0"
   },
