@@ -195,10 +195,10 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
-eris@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/eris/-/eris-0.12.0.tgz#4bcb0d4705fe188a59baec0baf6b31fcf5c9f809"
-  integrity sha512-LIw+uEOfHFCdE9BXL3wqxwml+74TJ7eMiMcyeW/jsmiWndDzybA/WlakiXAAnyg9a5OULOkHlKLOFsl+EgoZag==
+eris@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/eris/-/eris-0.13.0.tgz#9226d12897a87e484942ac74060625f41c010b2b"
+  integrity sha512-dSnKfQrLSoil/2YQ0+UX0SNm8YjICJjnO5HQgtiHNgM0HW2q5hZxb/1N9I56U6YDy9xXZ55kL9C+8bLlefZ2CA==
   dependencies:
     ws "^7.2.1"
   optionalDependencies:
