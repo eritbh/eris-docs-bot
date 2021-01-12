@@ -17,5 +17,6 @@ module.exports = new Command([
 Usage: \`e;docs ClassName\` or \`e;docs ClassName#methodPropOrEvent\`
 Source: <https://github.com/Geo1088/eris-docs-bot>
 Bot commit: \`${gitCommit}\`, using \`jsdoc@${jsdocVersion}\`, \`eris@${erisVersion}\`
+Eris version outdated? \`e;update\`
 	`).catch(console.error);
 });
