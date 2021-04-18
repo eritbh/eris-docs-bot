@@ -28,6 +28,13 @@ function paramPropMapper (param) {
 
 // Helper: converts the value from jsdoc to a more human-readable format
 function constantValueMapper (value) {
+	let parsedValue;
+	try {
+		parsedValue = JSON.parse(value);
+	} catch (error) {
+		// TODO: not sure what it means for code.value to not be a JSON value
+		return value;
+	}
 	if (Array.isArray(value)) {
 		if (value.length <= 6) {
 			const divider = value.some(i => i.length > 5) ? '\n' : ' ';
@@ -56,7 +63,7 @@ for (const doclet of rawDocsData) {
 		constants.push({
 			name: doclet.name,
 			display: `Constants#${doclet.name}`,
-			value: constantValueMapper(JSON.parse(doclet.meta.code.value)),
+			value: constantValueMapper(doclet.meta.code.value),
 		});
 		continue;
 	}
