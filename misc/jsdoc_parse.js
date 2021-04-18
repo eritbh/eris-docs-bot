@@ -6,7 +6,7 @@ const erisPackage = require('../node_modules/eris/package');
 
 // Execute jsdoc, get the JSON output, parse it, and store it.
 const rawDocsData = JSON.parse(childProcess
-	.execSync('yarn --silent run jsdoc', {encoding: 'utf8', maxBuffer: Infinity})
+	.execSync('npm run --silent jsdoc', {encoding: 'utf8', maxBuffer: Infinity})
 	.replace(/^> [^\n]*/gm, m => console.log(m) || ''));
 console.log();
 // We'll clean up the info and write what we want here
