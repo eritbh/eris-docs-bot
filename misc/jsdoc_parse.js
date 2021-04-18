@@ -28,9 +28,8 @@ function paramPropMapper (param) {
 
 // Helper: converts the value from jsdoc to a more human-readable format
 function constantValueMapper (value) {
-	let parsedValue;
 	try {
-		parsedValue = JSON.parse(value);
+		value = JSON.parse(value);
 	} catch (error) {
 		// TODO: not sure what it means for code.value to not be a JSON value
 		return value;
