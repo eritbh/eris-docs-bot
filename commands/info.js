@@ -15,8 +15,8 @@ module.exports = new Command([
 ], msg => {
 	msg.channel.createMessage(`
 Usage: \`e;docs ClassName\` or \`e;docs ClassName#methodPropOrEvent\`
-Source: <https://github.com/Geo1088/eris-docs-bot>
+Source: <https://github.com/eritbh/eris-docs-bot>
 Bot commit: \`${gitCommit}\`, using \`jsdoc@${jsdocVersion}\`, \`eris@${erisVersion}\`
-Eris version outdated? \`e;update\`
+Eris version outdated? Have someone with the contrib role in the Eris server do \`e;update\`
 	`).catch(console.error);
 });
