@@ -15,6 +15,7 @@ module.exports = new Command([
 ], msg => {
 	msg.channel.createMessage(`
 Usage: \`e;docs ClassName\` or \`e;docs ClassName#methodPropOrEvent\`
+Add to your server: <https://discord.com/api/oauth2/authorize?client_id=517160857193676803&permissions=0&scope=bot>
 Source: <https://github.com/eritbh/eris-docs-bot>
 Bot commit: \`${gitCommit}\`, using \`jsdoc@${jsdocVersion}\`, \`eris@${erisVersion}\`
 Eris version outdated? Have someone with the contrib role in the Eris server do \`e;update\`
