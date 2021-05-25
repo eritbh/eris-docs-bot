@@ -1,6 +1,6 @@
 # Eris Docs Bot
 
-Source for the Eris documentation bot on the [Discord API server](https://discord.gg/discord-api "Join") & the [Eris Server](https://dsicord.gg/eris "Join").
+Source for the Eris documentation bot on the [Discord API server](https://discord.gg/discord-api "Join") & the [Eris Server](https://discord.gg/eris "Join").
 
 ## Running
 
