@@ -2,6 +2,8 @@
 
 Source for the Eris documentation bot on the [Discord API server](https://discord.gg/discord-api "Join") & the [Eris Server](https://discord.gg/eris "Join").
 
+[Add the bot](https://discord.com/api/oauth2/authorize?client_id=517160857193676803&permissions=0&scope=bot)
+
 ## Running
 
 ```bash
