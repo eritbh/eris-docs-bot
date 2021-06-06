@@ -4,7 +4,11 @@ const path = require('path');
 const {Client} = require('yuuko');
 const config = require('./config');
 
-const c = new Client(config);
+const c = new Client({
+	allowMention: false,
+	caseSensitivePrefix: false,
+	...config,
+});
 
 c.once('ready', () => {
 	console.log('Ready!');
