@@ -10,7 +10,7 @@ Source for the Eris documentation bot on the [Discord API server](https://discor
 git clone https://github.com/eritbh/eris-docs-bot && cd eris-docs-bot
 cp config_sample.json config.json  # copy sample config
 $EDITOR config.json                # fill in token and stuff
-yarn                               # dependencies (or: npm install)
+npm install                        # dependencies
 node index.js                      # do the things
 ```
 
