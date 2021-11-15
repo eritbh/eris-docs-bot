@@ -17,6 +17,6 @@
     "lint": "node_modules/.bin/eslint . --ext .js",
     "start": "node index.js"
   },
-  "repository": "https://github.com/Geo1088/eris-docs-bot.git",
-  "author": "Geo1088 <georgej1088@gmail.com>"
+  "repository": "https://github.com/eritbh/eris-docs-bot.git",
+  "author": "eritbh <erin20913@gmail.com>"
 }
